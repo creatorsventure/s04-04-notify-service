@@ -1,0 +1,14 @@
+<div th:fragment="emailSignature">
+    <p th:text="#{email.template.support}"></p>
+    <table class="signature" style="margin-top: 30px;">
+        <tr>
+            <td style="font-size: 16px;" th:text="#{email.template.regards}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{email.template.title}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{email.template.address}"></td>
+        </tr>
+    </table>
+</div>

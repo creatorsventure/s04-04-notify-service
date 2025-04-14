@@ -1,0 +1,112 @@
+<head th:fragment="emailHead">
+    <meta charset="UTF-8">
+    <title th:text="#{email.template.title}"></title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f4f6f9;
+            font-family: Arial, sans-serif;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 0 5%;
+        }
+
+        .header {
+            background-color: #3FA9FF;
+            color: white;
+            padding: 30px 20px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .header img {
+            height: 60px;
+        }
+
+        .header-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .header-brand h1 {
+            margin: 0;
+            font-size: 24px;
+            color: white;
+        }
+
+        .header-brand p {
+            margin: 4px 0 0;
+            font-size: 14px;
+            color: #eaf4fd;
+        }
+
+        .content {
+            background-color: white;
+            padding: 40px 30px;
+            flex: 1;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .message-header {
+            font-size: 20px;
+            font-weight: bold;
+            color: #3FA9FF;
+        }
+
+        .meta-info {
+            text-align: right;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .highlight-box {
+            background-color: #eef7ff;
+            border-left: 5px solid #3FA9FF;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 10px 0 30px 0;
+            font-size: 16px;
+        }
+
+        .signature td {
+            font-size: 15px;
+            color: #555;
+        }
+
+        .signature td:first-child {
+            font-weight: bold;
+            color: #3FA9FF;
+        }
+
+        .footer {
+            background-color: #3FA9FF;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 13px;
+        }
+    </style>
+</head>
