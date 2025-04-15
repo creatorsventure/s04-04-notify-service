@@ -44,7 +44,7 @@ import java.util.zip.ZipOutputStream;
 public class EmailServiceImplementation implements EmailService {
 
     private final JavaMailSender mailSender;
-    private final SpringTemplateEngine templateEngine;
+    private final SpringTemplateEngine emailTemplateEngine;
     private MessageSource messageSource;
     private MessageRepository messageRepository;
     private MessageMapper messageMapper;
@@ -95,7 +95,7 @@ public class EmailServiceImplementation implements EmailService {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
             log.info("Rendering email template: {}", message.getDeliveryTemplate().toString());
-            message.setContent(templateEngine.process("layout/" + message.getDeliveryTemplate().toString(), context));
+            message.setContent(emailTemplateEngine.process("layout/" + message.getDeliveryTemplate().toString(), context));
             helper.setText(message.getContent(), true);
             return new EmailPayload(mimeMessage, helper);
         } catch (Exception e) {
