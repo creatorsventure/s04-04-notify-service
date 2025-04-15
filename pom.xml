@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.cv</groupId>
     <artifactId>s04-04-notify-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>s04-04-notify-service</name>
     <description>s04-04-notify-service</description>
     <url/>
