@@ -31,6 +31,9 @@ jobs:
           </settings>
           EOF
 
+      - name: Copy settings.xml to Docker context
+        run: cp ~/.m2/settings.xml ./settings.xml
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
