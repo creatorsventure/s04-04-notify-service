@@ -1,9 +1,11 @@
 package com.cv.s0404notifyservice.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
@@ -11,18 +13,36 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import java.nio.charset.StandardCharsets;
 
+@AllArgsConstructor
 @Configuration
-public class ThymeleafConfig {
+public class WebConfig {
 
-    @Autowired
-    private MessageSource messageSource; // 👈 Inject your I18N-configured MessageSource
+    @Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
+        source.setBasenames(
+                "classpath:messages",             // for templates and app I18N
+                "classpath:ValidationMessages"    // for @NotBlank etc.
+        );
+        source.setDefaultEncoding("UTF-8");
+        source.setUseCodeAsDefaultMessage(true);
+        source.setFallbackToSystemLocale(false);
+        return source;
+    }
+
+    @Bean
+    public LocalValidatorFactoryBean getValidator() {
+        LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+        bean.setValidationMessageSource(messageSource()); // 👈 this is crucial
+        return bean;
+    }
 
     @Bean
     public SpringTemplateEngine emailTemplateEngine() {
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setTemplateResolver(emailTemplateResolver());
         engine.setEnableSpringELCompiler(true);
-        engine.setMessageSource(messageSource); // ✅ Important for I18N
+        engine.setMessageSource(messageSource()); // ✅ Important for I18N
         return engine;
     }
 
