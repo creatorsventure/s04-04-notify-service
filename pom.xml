@@ -55,7 +55,7 @@
         <org.projectlombok.version>1.18.36</org.projectlombok.version>
         <spring-cloud.version>2024.0.1</spring-cloud.version>
 
-        <notify-service-pojo-version>0.0.25-SNAPSHOT</notify-service-pojo-version>
+        <notify-service-pojo-version>0.0.26-SNAPSHOT</notify-service-pojo-version>
     </properties>
     <dependencies>
         <dependency>
@@ -94,6 +94,10 @@
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-kafka</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
