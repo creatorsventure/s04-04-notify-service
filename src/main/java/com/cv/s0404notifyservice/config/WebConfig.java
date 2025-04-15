@@ -44,7 +44,6 @@ public class WebConfig {
     }
 
     @Bean
-    @DependsOn("messageSource")
     public SpringTemplateEngine emailTemplateEngine() {
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setTemplateResolver(emailTemplateResolver());
