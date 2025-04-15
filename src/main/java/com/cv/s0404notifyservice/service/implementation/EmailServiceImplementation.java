@@ -12,6 +12,7 @@ import com.cv.s0404notifyservice.repository.RecipientRepository;
 import com.cv.s0404notifyservice.service.intrface.EmailService;
 import com.cv.s0404notifyservice.service.mapper.MessageMapper;
 import com.cv.s0404notifyservice.service.mapper.RecipientMapper;
+import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.zip.ZipEntry;
@@ -54,6 +56,11 @@ public class EmailServiceImplementation implements EmailService {
     private DeliveryHistoryRepository deliveryHistoryRepository;
 
     private record EmailPayload(MimeMessage message, MimeMessageHelper helper) {
+    }
+
+    @PostConstruct
+    public void debugI18n() {
+        System.out.println("📦 I18N: " + messageSource.getMessage("email.template.title", null, Locale.ENGLISH));
     }
 
     @Async(NofityConstant.NOTIFY_TASK_EXECUTOR) // 💡 runs in a virtual thread pool

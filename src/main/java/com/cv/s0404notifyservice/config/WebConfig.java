@@ -21,8 +21,8 @@ public class WebConfig {
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
         source.setBasenames(
-                "messages",             // for templates and app I18N
-                "ValidationMessages"    // for @NotBlank etc.
+                "classpath:messages",             // for templates and app I18N
+                "classpath:ValidationMessages"    // for @NotBlank etc.
         );
         source.setDefaultEncoding("UTF-8");
         source.setUseCodeAsDefaultMessage(true);
