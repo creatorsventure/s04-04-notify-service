@@ -58,10 +58,10 @@ public class EmailServiceImplementation implements EmailService {
     private record EmailPayload(MimeMessage message, MimeMessageHelper helper) {
     }
 
-    /*@PostConstruct
+    @PostConstruct
     public void debugI18n() {
         log.info("📦 I18N: {}", messageSource.getMessage("email.template.title", null, Locale.ENGLISH));
-    }*/
+    }
 
     @Async(NofityConstant.NOTIFY_TASK_EXECUTOR) // 💡 runs in a virtual thread pool
     public CompletableFuture<Void> sendEmail(MessageDto message, RecipientDto recipient) {
