@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -57,6 +58,7 @@ public class EmailServiceImplementation implements EmailService {
 
     @Async(NofityConstant.NOTIFY_TASK_EXECUTOR) // 💡 runs in a virtual thread pool
     public CompletableFuture<Void> sendEmail(MessageDto message, RecipientDto recipient) {
+        LocaleContextHolder.setLocale(message.getLocale());
         return CompletableFuture.supplyAsync(() -> getContextSafe(message, recipient))
                 .thenApplyAsync(ctx -> renderTemplate(ctx, message, recipient))
                 .thenApplyAsync(emailPayload -> handleAttachmentIfRequired(emailPayload, message))
@@ -69,7 +71,9 @@ public class EmailServiceImplementation implements EmailService {
 
     private Context getContextSafe(MessageDto message, RecipientDto recipient) {
         try {
+            log.info("LocaleContextHolder Locale : {}", LocaleContextHolder.getLocale());
             Context context = new Context(message.getLocale());
+            log.info("Context Locale : {}", context.getLocale());
             if (message.getDeliveryTemplate().equals(DeliveryTemplate.BASE_LAYOUT)) {
                 message.setSubject(message.getSubjectDto().isTranslate()
                         ? messageSource.getMessage(message.getSubjectDto().getKeyOrContent(), null, message.getLocale())
@@ -94,7 +98,7 @@ public class EmailServiceImplementation implements EmailService {
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-            log.info("Rendering email template: {}", message.getDeliveryTemplate().toString());
+            log.info("Rendering email locale: {}, template: {}", context.getLocale(), message.getDeliveryTemplate().toString());
             message.setContent(emailTemplateEngine.process("layout/" + message.getDeliveryTemplate().toString(), context));
             helper.setText(message.getContent(), true);
             return new EmailPayload(mimeMessage, helper);
