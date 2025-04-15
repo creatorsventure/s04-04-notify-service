@@ -58,10 +58,10 @@ public class EmailServiceImplementation implements EmailService {
     private record EmailPayload(MimeMessage message, MimeMessageHelper helper) {
     }
 
-    @PostConstruct
+    /*@PostConstruct
     public void debugI18n() {
-        System.out.println("📦 I18N: " + messageSource.getMessage("email.template.title", null, Locale.ENGLISH));
-    }
+        log.info("📦 I18N: {}", messageSource.getMessage("email.template.title", null, Locale.ENGLISH));
+    }*/
 
     @Async(NofityConstant.NOTIFY_TASK_EXECUTOR) // 💡 runs in a virtual thread pool
     public CompletableFuture<Void> sendEmail(MessageDto message, RecipientDto recipient) {
@@ -80,7 +80,6 @@ public class EmailServiceImplementation implements EmailService {
         try {
             log.info("LocaleContextHolder Locale : {}", LocaleContextHolder.getLocale());
             Context context = new Context(message.getLocale());
-            log.info("Context Locale : {}", context.getLocale());
             if (message.getDeliveryTemplate().equals(DeliveryTemplate.BASE_LAYOUT)) {
                 message.setSubject(message.getSubjectDto().isTranslate()
                         ? messageSource.getMessage(message.getSubjectDto().getKeyOrContent(), null, message.getLocale())
