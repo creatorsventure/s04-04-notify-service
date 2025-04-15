@@ -38,11 +38,6 @@ jobs:
           username: ${{ secrets.ACTION_USER }}
           password: ${{ secrets.ACTION_SECRET }}
 
-      - name: Debug secrets (TEMPORARY!)
-        run: |
-          echo "ACTION_USER=${{ secrets.ACTION_USER }}"
-          echo "ACTION_SECRET=${{ secrets.ACTION_SECRET }}" | wc -c
-
       - name: Set up image name and tags
         id: vars
         run: |

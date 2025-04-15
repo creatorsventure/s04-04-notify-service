@@ -41,7 +41,7 @@
         <repository>
             <id>github</id>
             <url>
-                https://maven.pkg.github.com/creatorsventure/s04-04-notify-service-pojo
+                https://maven.pkg.github.com/creatorsventure/s04-02-notify-service-pojo
             </url>
             <snapshots>
                 <enabled>true</enabled>
