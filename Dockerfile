@@ -4,6 +4,10 @@ FROM maven:3.9.9-eclipse-temurin-23 as builder
 # Set the working directory
 WORKDIR /app
 
+# Copy Maven config (including credentials)
+COPY settings.xml /root/.m2/settings.xml
+
+
 # Copy all files
 COPY . .
 
@@ -30,6 +34,8 @@ WORKDIR /app
 
 # Copy the built jar file from the builder stage
 COPY --from=builder /app/target/*.jar app.jar
+
+COPY settings.xml /root/.m2/settings.xml
 
 # Run the Spring Boot application
 ENTRYPOINT ["java", "-jar", "app.jar"]
