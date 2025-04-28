@@ -21,7 +21,7 @@
                 style="width:100%; border-collapse: collapse;" border="1">
             <thead>
             <tr style="background-color:#f0f8ff;">
-                <th th:each="header : ${tableDto.header}" th:text="${header}" style="padding:8px;">Header</th>
+                <th th:each="header : ${tableDto.header}" th:text="#{${header}}" style="padding:8px;">Header</th>
             </tr>
             </thead>
 
@@ -31,6 +31,19 @@
             </tr>
             </tbody>
         </table>
+        <div th:if="${footerContentLines != null and !#lists.isEmpty(footerContentLines)}">
+            <p th:each="content : ${footerContentLines}">
+                <th:block th:if="${content.isLink()}">
+                    <a th:href="${content.getKeyOrContent()}" th:text="#{${content.getKeyOrLinkLabel()}}"></a>
+                </th:block>
+                <th:block th:if="${content.isTranslate()}">
+                    <span th:text="#{${content.getKeyOrContent()}}"></span>
+                </th:block>
+                <th:block th:if="${not content.isTranslate() and not content.isLink()}">
+                    <span th:text="${content.getKeyOrContent()}"></span>
+                </th:block>
+            </p>
+        </div>
     </div>
     <div th:replace="~{fragment/signature :: emailSignature}"></div>
 </div>

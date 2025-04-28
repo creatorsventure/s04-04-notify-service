@@ -55,7 +55,7 @@
         <org.projectlombok.version>1.18.36</org.projectlombok.version>
         <spring-cloud.version>2024.0.1</spring-cloud.version>
 
-        <notify-service-pojo-version>0.0.29-SNAPSHOT</notify-service-pojo-version>
+        <notify-service-pojo-version>0.0.30-SNAPSHOT</notify-service-pojo-version>
     </properties>
     <dependencies>
         <dependency>
