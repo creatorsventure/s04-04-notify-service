@@ -89,6 +89,7 @@ public class EmailServiceImplementation implements EmailService {
                 context.setVariable("trackId", message.getTrackId());
                 context.setVariable("contentLines", message.getContentLines());
                 context.setVariable("tableDto", message.getTableDto());
+                context.setVariable("footerContentLines", message.getFooterContentLines());
             } else {
                 log.error("❌ Invalid delivery template for {}", recipient.getEmail());
                 throw new RuntimeException("Invalid delivery template");
