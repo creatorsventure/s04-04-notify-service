@@ -32,15 +32,15 @@
             </tbody>
         </table>
         <div th:if="${footerContentLines != null and !#lists.isEmpty(footerContentLines)}">
-            <p th:each="content : ${footerContentLines}">
-                <th:block th:if="${content.isLink()}">
-                    <a th:href="${content.getKeyOrContent()}" th:text="#{${content.getKeyOrLinkLabel()}}"></a>
+            <p th:each="footerContent : ${footerContentLines}">
+                <th:block th:if="${footerContent.isLink()}">
+                    <a th:href="${footerContent.getKeyOrContent()}" th:text="#{${footerContent.getKeyOrLinkLabel()}}"></a>
                 </th:block>
-                <th:block th:if="${content.isTranslate()}">
-                    <span th:text="#{${content.getKeyOrContent()}}"></span>
+                <th:block th:if="${footerContent.isTranslate()}">
+                    <span th:text="#{${footerContent.getKeyOrContent()}}"></span>
                 </th:block>
-                <th:block th:if="${not content.isTranslate() and not content.isLink()}">
-                    <span th:text="${content.getKeyOrContent()}"></span>
+                <th:block th:if="${not footerContent.isTranslate() and not footerContent.isLink()}">
+                    <span th:text="${footerContent.getKeyOrContent()}"></span>
                 </th:block>
             </p>
         </div>
