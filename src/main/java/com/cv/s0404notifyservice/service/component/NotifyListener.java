@@ -20,7 +20,7 @@ public class NotifyListener {
 
     private EmailService emailService;
 
-    @KafkaListener(topics = "${app.kafka.notify-service.topic}", groupId = "${app.kafka.notify-service.group}", containerFactory = "notifyDtoListenerFactory")
+    @KafkaListener(topics = "${app.notify-service.kafka.topic}", groupId = "${app.notify-service.kafka.group}", containerFactory = "notifyDtoListenerFactory")
     public void listen(NotifyDto dto, Acknowledgment ack) {
         if (dto == null || dto.getMappings() == null || dto.getMappings().isEmpty()) {
             log.warn("🚫 Received null or empty NotifyDto.");
